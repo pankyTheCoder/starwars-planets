@@ -12,7 +12,7 @@ export const actions: ActionTree<starWarsState, Record<string, never>> = {
   async [FETCH_PLANETS]({ commit }, pagination: any) {
     commit(SET_IS_PLANETS_LOADING, true);
     commit(SET_PLANETS, []);
-    const { sortBy, sortDesc, itemsPerPage, page } = pagination;
+    const { sortBy, sortDesc, page } = pagination;
     const planetResults = await StarWarsService.discoverPlanets(page);
     let { results: planets } = planetResults?.data;
     const { count: totalPlanets } = planetResults?.data;
@@ -31,9 +31,6 @@ export const actions: ActionTree<starWarsState, Record<string, never>> = {
           return 0;
         }
       });
-    }
-    if (itemsPerPage > 0) {
-      planets = planets.slice((page - 1) * itemsPerPage, page * itemsPerPage);
     }
     commit(SET_PLANETS, planets);
     commit(SET_TOTAL_PLANETS, totalPlanets);
