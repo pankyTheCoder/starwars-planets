@@ -13,7 +13,6 @@
           class="elevation-3"
           loading-text="Loading Planets..."
           no-data-text="Planets not available!"
-          must-sort
         />
       </v-col>
     </v-row>
